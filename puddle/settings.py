@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
+load_dotenv()  
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-j4ippt+3h39u4ontllpc8a(4h&^god(7aicz#@q^sl_(w)2otp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.gitpod.io', '.vercel.app', '']
+ALLOWED_HOSTS = ['.gitpod.io', '.vercel.app', '*']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -83,12 +85,12 @@ WSGI_APPLICATION = 'puddle.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dohruezy',
-        'USER': 'dohruezy',
-        'PASSWORD': 'K-7Dw6LGSq9vm6y5UzRw_vtO7LouNfZT',
-        'HOST': 'satao.db.elephantsql.com',
-        'PORT': '5432',
+        'ENGINE': str(os.getenv('DBengine')),
+        'NAME': str(os.getenv('DBname')),
+        'USER': str(os.getenv('DBUserName')),
+        'PASSWORD': str(os.getenv('DBpassword')),
+        'HOST': str(os.getenv('DBhost')),
+        'PORT': str(os.getenv('DBport')),
     }
 }
 
